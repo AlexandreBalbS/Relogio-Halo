@@ -4,7 +4,7 @@
 
 //SISTEMA PICO
   #include <Wire.h>
-  #include <Scheduler.h>
+//  #include <Scheduler.h>
  
   unsigned long lastTime;
   int cont=0;
@@ -122,7 +122,7 @@ void setup() {
   //SISTEMA
     Wire.begin();
     Wire.setClock(400000);
-    Serial.begin(115200);
+    //Serial.begin(115200);
 
     for (int i=0; i<4; i++){
       pinMode(pinA[i],OUTPUT);
@@ -136,8 +136,8 @@ void setup() {
     
   //RTC  
     myRTC.setClockMode(modo);
-    //myRTC.setHour(10); //acerta o relogio do DS3231
-    //myRTC.setMinute(47);
+    //myRTC.setHour(11); //acerta o relogio do DS3231
+    //myRTC.setMinute(34);
     //myRTC.setSecond(0);
     int  hora=myRTC.getHour(h12, hpm);
     int  minuto=myRTC.getMinute();
@@ -146,12 +146,6 @@ void setup() {
 
 
 
-  //FASTLED
-      FastLED.addLeds<WS2812B, Pino, GRB>(Halo, Leds).setCorrection(TypicalLEDStrip);
-      FastLED.setBrightness(brilho);
-      FastLED.clear();
-      FastLED.show();
-      Scheduler.startLoop(loop2);
     }
 
 void loop() {
@@ -183,12 +177,16 @@ void loop() {
       }
   }     
 
-void loop2(){
-/*if(millis() - lastTime >= 1000) {
-    rtc.read(); 
-    PrintTime();
-    lastTime = millis();
-  }*/
+void setup1(){
+  //FASTLED
+      FastLED.addLeds<WS2812B, Pino, GRB>(Halo, Leds).setCorrection(TypicalLEDStrip);
+      FastLED.setBrightness(brilho);
+      FastLED.clear();
+      FastLED.show();
+
+}
+void loop1(){
+
   rtc.read();
   horapico=rtc.hour;
   
